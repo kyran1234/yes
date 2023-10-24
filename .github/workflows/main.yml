@@ -15,11 +15,10 @@ jobs:
         with:
           sparse-checkout: |
             .github
-             ./packing     -
+            ./packing
       
-       - name: Print working directory
-         run: echo "Current working directory: $(pwd)"
-
+      - name: Print working directory
+        run: echo "Current working directory: $(pwd)"
        
       - name: Create a Zip package 🐙
         uses: OctopusDeploy/create-zip-package-action@v3
