@@ -16,10 +16,10 @@ jobs:
 
       - name: Build
         run: |
-
-           npm install
-           npm run build
-           tar -czvf blog.tar.gz dist/
+             cd ${{ github.workspace }}/packing
+             tar -czvf packing.tar.gz *
+             cd ${{ github.workspace }}
+        
 
       - name: Push to Main
         uses: ad-m/github-push-action@master
