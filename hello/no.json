@@ -1,0 +1,7 @@
+import json
+
+data = {"key1" : "value1", "key2" : "value2"}
+
+# 我们用到了json库的dumps方法，将Python对象转化为Json对象
+jsonData = json.dumps(data)
+print(jsonData)
