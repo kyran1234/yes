@@ -16,9 +16,13 @@ jobs:
 
       - name: Build
         run: |
-             cd ${{ github.workspace }}/packing
-             tar -czvf packing.tar.gz *
-             cd ${{ github.workspace }}
+              if [ ! -d "packing" ]; then
+              mkdir packing
+              fi
+              cp -r ${{ github.workspace }}/hello/* packing/
+              cd packing
+              tar -czvf packing.tar.gz *
+              cd ..
         
 
       - name: Push to Main
