@@ -1,0 +1,44 @@
+name: Push Package to Main Branch
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  push_package:
+    runs-on: ubuntu-latest
+    
+    steps:
+   
+      - name: checkout
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            .github
+             ./packing     -
+      
+       - name: Print working directory
+         run: echo "Current working directory: $(pwd)"
+
+       
+      - name: Create a Zip package 🐙
+        uses: OctopusDeploy/create-zip-package-action@v3
+        with:
+          package_id: DemoPackage
+          version: 1.0.0
+          output_folder: ./packing
+          base_path: ./hello
+          files: '**/*.*'
+      
+      - name: Configure Git
+        run: |
+          git config --global user.name "kryan1234"
+          git config --global user.email "3298665635@qq.com"
+      
+      - name: Push Package to Main Branch
+        run: |
+          git checkout main
+          git add ./packing
+          git commit -m "Add package from dev branch"
+          git push origin main
