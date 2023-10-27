@@ -20,6 +20,7 @@ jobs:
               mkdir packing
               fi
               cp -r ${{ github.workspace }}/hello/* packing/
+              echo "${{ github.workspace }}/hello/* packing/"
               cd packing
               tar -czvf packing.tar.gz *
               cd ..
