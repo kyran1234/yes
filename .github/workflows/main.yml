@@ -16,11 +16,15 @@ jobs:
 
       - name: Build
         run: |
-          # 在这里执行打包操作，将博客文件打包到一个文件夹或压缩文件中
-          # 例如，在这里可以执行类似以下命令：
-          # npm install
-          # npm run build
-          # tar -czvf blog.tar.gz dist/
+              if [ ! -d "packing" ]; then
+              mkdir packing
+              fi
+              cp -r ${{ github.workspace }}/hello/* packing/
+              echo "${{ github.workspace }}/hello/* packing/"
+              cd packing
+              tar -czvf packing.tar.gz *
+              cd ..
+        
 
       - name: Push to Main
         uses: ad-m/github-push-action@master
